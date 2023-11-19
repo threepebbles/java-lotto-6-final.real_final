@@ -39,8 +39,11 @@ public class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
     public LottoDto toDto() {
         return new LottoDto(numbers);
+    }
+
+    public boolean contains(Integer target) {
+        return numbers.contains(target);
     }
 }

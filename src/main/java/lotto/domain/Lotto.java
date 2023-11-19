@@ -11,7 +11,9 @@ public class Lotto {
         validateSize(numbers);
         validateDuplication(numbers);
         numbers.forEach(this::validateInRange);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .sorted()
+                .toList();
     }
 
     private void validateSize(List<Integer> numbers) {

@@ -17,6 +17,9 @@ public class WinningStatistics {
     private Long calculateTotalPrizeSum() {
         long sum = 0;
         for (LottoPrize lottoPrize : prizeCount.keySet()) {
+            if (prizeCount.get(lottoPrize) == null) {
+                continue;
+            }
             sum += (long) prizeCount.get(lottoPrize) * lottoPrize.getAmount();
         }
         return sum;

@@ -12,7 +12,7 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = lottos;
     }
 
-    public LottosDto toDto() {
+    public LottosDto toLottosDto() {
         return new LottosDto(lottos.stream()
                 .map(Lotto::toLottoDto)
                 .toList());

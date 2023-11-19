@@ -1,36 +1,23 @@
 package lotto.domain;
 
 import java.util.Map;
-import lotto.view.output.dto.WinningStatisticsDto;
+import lotto.view.output.dto.PrizeCountDto;
+import lotto.view.output.dto.RateOfReturnDto;
 
 public class WinningStatistics {
     private final Map<LottoPrize, Integer> prizeCount;
+    private final double rateOfReturn;
 
-    public WinningStatistics(Map<LottoPrize, Integer> prizeCount) {
+    public WinningStatistics(Map<LottoPrize, Integer> prizeCount, Double rateOfReturn) {
         this.prizeCount = prizeCount;
+        this.rateOfReturn = rateOfReturn;
     }
 
-    public WinningStatisticsDto toWinningStatisticsDto() {
-        return new WinningStatisticsDto(prizeCount);
+    public PrizeCountDto toPrizeCountDto() {
+        return new PrizeCountDto(prizeCount);
     }
 
-    private Long calculateTotalPrizeSum() {
-        long sum = 0;
-        for (LottoPrize lottoPrize : prizeCount.keySet()) {
-            sum += (long) countPrize(lottoPrize) * lottoPrize.getAmount();
-        }
-        return sum;
-    }
-
-    public Double calculateRateOfReturn(Lottos purchased) {
-        int totalAmount = purchased.size() * LottoMachine.LOTTO_UNIT_PRICE;
-        return (double) calculateTotalPrizeSum() / totalAmount * 100.0;
-    }
-
-    public int countPrize(LottoPrize lottoPrize) {
-        if (prizeCount.get(lottoPrize) == null) {
-            return 0;
-        }
-        return prizeCount.get(lottoPrize);
+    public RateOfReturnDto toRateOfReturnDto() {
+        return new RateOfReturnDto(rateOfReturn);
     }
 }

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrize;
 
-public class WinningStatisticsDto {
+public class PrizeCountDto {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private final Map<LottoPrize, Integer> prizeCount;
 
-    public WinningStatisticsDto(Map<LottoPrize, Integer> prizeCount) {
+    public PrizeCountDto(Map<LottoPrize, Integer> prizeCount) {
         this.prizeCount = prizeCount;
     }
 

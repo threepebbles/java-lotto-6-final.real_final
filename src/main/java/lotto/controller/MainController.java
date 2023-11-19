@@ -11,7 +11,6 @@ import lotto.service.LottoMatcherService;
 import lotto.service.LottoPurchaseService;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
-import lotto.view.output.dto.RateOfReturnDto;
 
 public class MainController {
 
@@ -30,14 +29,12 @@ public class MainController {
         int purchaseAmount = requestPurchaseAmount();
 
         Lottos purchased = lottoPurchaseService.requestPurchaseLottos(purchaseAmount);
-        outputView.printPurchasedLottoScreen(purchased.toDto());
+        outputView.printPurchasedLottoScreen(purchased.toLottosDto());
 
         WinningNumbers winningNumbers = requestWinningNumbers();
         WinningStatistics winningStatistics = lottoMatcherService.calculateWinningStatistics(winningNumbers, purchased);
-        outputView.printWinningStatisticsScreen(winningStatistics.toWinningStatisticsDto());
-
-        Double rateOfReturn = winningStatistics.calculateRateOfReturn(purchased);
-        outputView.printRateOfReturnScreen(new RateOfReturnDto(rateOfReturn));
+        outputView.printPrizeCountScreen(winningStatistics.toPrizeCountDto());
+        outputView.printRateOfReturnScreen(winningStatistics.toRateOfReturnDto());
     }
 
     private WinningNumbers requestWinningNumbers() {

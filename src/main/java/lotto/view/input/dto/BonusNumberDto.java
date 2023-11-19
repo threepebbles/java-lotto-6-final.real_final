@@ -41,4 +41,8 @@ public class BonusNumberDto {
             throw new IllegalArgumentException(ErrorMessage.getBonusNumberErrorMessage());
         }
     }
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
 }

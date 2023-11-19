@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import lotto.ErrorMessage;
+import lotto.view.input.dto.WinningLottoDto;
 import lotto.view.output.dto.LottoDto;
 
 public class Lotto {
@@ -14,6 +15,10 @@ public class Lotto {
         this.numbers = numbers.stream()
                 .sorted()
                 .toList();
+    }
+
+    public static Lotto createDto(WinningLottoDto winningLottoDto) {
+        return new Lotto(winningLottoDto.getNumbers());
     }
 
     private void validateSize(List<Integer> numbers) {

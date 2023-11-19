@@ -59,4 +59,8 @@ public class WinningLottoDto {
             throw new IllegalArgumentException(ErrorMessage.getWinningLottoErrorMessage());
         }
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

@@ -24,7 +24,7 @@ public class WinningStatistics {
 
     public Double calculateRateOfReturn(Lottos purchased) {
         int totalAmount = purchased.size() * LottoMachine.LOTTO_UNIT_PRICE;
-        Double rateOfReturn = (double) calculateTotalPrizeSum() / totalAmount;
+        Double rateOfReturn = (double) calculateTotalPrizeSum() / totalAmount * 100.0;
         return rateOfReturn;
     }
 }

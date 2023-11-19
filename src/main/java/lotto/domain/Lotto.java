@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.view.output.dto.LottoDto;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -17,4 +18,7 @@ public class Lotto {
     }
 
     // TODO: 추가 기능 구현
+    public LottoDto toDto() {
+        return new LottoDto(numbers);
+    }
 }

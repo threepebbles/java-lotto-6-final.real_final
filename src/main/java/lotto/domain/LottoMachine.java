@@ -19,15 +19,15 @@ public class LottoMachine {
         return money / LOTTO_UNIT_PRICE;
     }
 
-    private List<Lotto> generateLottosByQuantity(int quantity) {
+    private Lottos generateLottosByQuantity(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(lottoGenerator.generateLotto());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
-    public List<Lotto> generateLottosByMoney(int money) {
+    public Lottos generateLottosByMoney(int money) {
         List<Lotto> lottos = new ArrayList<>();
         int quantity = calculateQuantity(money);
         return generateLottosByQuantity(quantity);

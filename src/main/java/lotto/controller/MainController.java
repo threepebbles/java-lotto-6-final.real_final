@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import java.util.function.Supplier;
+import lotto.ErrorMessage;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningStatistics;
@@ -45,8 +47,13 @@ public class MainController {
     }
 
     private int requestPurchaseAmount() {
-        return inputView.requestPurchaseAmountDto()
-                .getPurchaseAmount();
+        return (Integer) retryUntilSuccess(() -> {
+            int purchaseAmount = inputView.requestPurchaseAmountDto().getPurchaseAmount();
+            if (purchaseAmount % LottoMachine.LOTTO_UNIT_PRICE != 0) {
+                throw new IllegalArgumentException(ErrorMessage.getPurchaseAmountErrorMessage());
+            }
+            return purchaseAmount;
+        });
     }
 
     private Lotto requestWinningLotto() {

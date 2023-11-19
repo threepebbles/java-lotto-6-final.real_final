@@ -20,6 +20,7 @@ public class OutputView {
     }
 
     public void printWinningStatisticsScreen(WinningStatisticsDto winningStatisticsDto) {
+        System.out.print(LINE_SEPARATOR);
         System.out.printf(WINNING_STATISTICS_SCREEN,
                 winningStatisticsDto.toString());
     }

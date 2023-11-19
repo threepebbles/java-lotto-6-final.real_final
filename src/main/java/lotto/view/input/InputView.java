@@ -22,7 +22,7 @@ public class InputView {
 
     public WinningLottoDto requestWinningLottoDto() {
         return (WinningLottoDto) retryUntilSuccess(() -> {
-            System.out.print(ENTER_WINNING_LOTTO);
+            System.out.print(LINE_SEPARATOR + ENTER_WINNING_LOTTO);
             String winningLotto = Console.readLine();
             return WinningLottoDto.createWinningLottoDto(winningLotto);
         });
@@ -30,7 +30,7 @@ public class InputView {
 
     public BonusNumberDto requestBonusNumberDto(WinningLottoDto winningLottoDto) {
         return (BonusNumberDto) retryUntilSuccess(() -> {
-            System.out.print(ENTER_BONUS_NUMBER);
+            System.out.print(LINE_SEPARATOR + ENTER_BONUS_NUMBER);
             String bonusNumber = Console.readLine();
             return BonusNumberDto.createBonusNumberDto(bonusNumber, winningLottoDto);
         });

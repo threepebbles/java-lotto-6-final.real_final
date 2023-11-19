@@ -8,7 +8,7 @@ public class ErrorMessage {
     public static final String NOT_PROPER_WINNING_LOTTO = "유효하지 않은 당첨 번호입니다.";
     public static final String NOT_PROPER_BONUS_NUMBER = "유효하지 않은 보너스 번호입니다.";
 
-    private static String getErrorMessage(String message) {
+    public static String getErrorMessage(String message) {
         return ERROR_HEADER + WHITE_SPACE
                 + message + WHITE_SPACE
                 + RETRY;

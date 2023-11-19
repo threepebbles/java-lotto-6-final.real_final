@@ -11,8 +11,8 @@ import lotto.domain.LottoPrize;
 import lotto.view.output.OutputView;
 import lotto.view.output.dto.LottoDto;
 import lotto.view.output.dto.LottosDto;
+import lotto.view.output.dto.PrizeCountDto;
 import lotto.view.output.dto.RateOfReturnDto;
-import lotto.view.output.dto.WinningStatisticsDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,10 +62,9 @@ public class OutputViewTest {
             put(LottoPrize.FIRST, 4);
             put(LottoPrize.NOTHING, 10);
         }};
+        PrizeCountDto prizeCountDto = new PrizeCountDto(prizeCount);
 
-        WinningStatisticsDto winningStatisticsDto = new WinningStatisticsDto(prizeCount);
-
-        outputView.printWinningStatisticsScreen(winningStatisticsDto);
+        outputView.printPrizeCountScreen(prizeCountDto);
 
         assertThat(output.toString())
                 .contains("당첨 통계",

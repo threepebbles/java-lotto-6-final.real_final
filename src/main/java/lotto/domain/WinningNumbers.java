@@ -30,4 +30,23 @@ public class WinningNumbers {
             throw new IllegalArgumentException(ErrorMessage.getBonusNumberErrorMessage());
         }
     }
+
+    public int calculateMatchCount(Lotto other) {
+        return (int) lotto.getNumbers().stream()
+                .filter(other::contains)
+                .count();
+    }
+
+    public boolean isBonusMatched(Lotto lotto) {
+        for (Integer number : lotto) {
+            if (isBonusMatched(number)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isBonusMatched(int bonusNumber) {
+        return this.bonusNumber == bonusNumber;
+    }
 }

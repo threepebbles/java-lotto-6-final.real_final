@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import lotto.ErrorMessage;
 import lotto.view.input.dto.WinningLottoDto;
 import lotto.view.output.dto.LottoDto;
 
-public class Lotto {
+public class Lotto implements Iterable<Integer> {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -21,8 +23,12 @@ public class Lotto {
         return new Lotto(winningLottoDto.getNumbers());
     }
 
-    public LottoDto toDto() {
+    public LottoDto toLottoDto() {
         return new LottoDto(numbers);
+    }
+
+    public WinningLottoDto toWinningLottoDto() {
+        return new WinningLottoDto(numbers);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -52,7 +58,17 @@ public class Lotto {
         return numbers.contains(target);
     }
 
-    public WinningLottoDto toWinningLottoDto() {
-        return new WinningLottoDto(numbers);
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return numbers.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super Integer> action) {
+        numbers.forEach(action);
     }
 }

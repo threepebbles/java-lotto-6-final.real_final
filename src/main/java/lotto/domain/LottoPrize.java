@@ -17,6 +17,19 @@ public enum LottoPrize {
         this.bonusNumberMatters = bonusNumberMatters;
     }
 
+    public static LottoPrize valueOf(int matchCount, boolean isBonusMatched) {
+        if (matchCount == SECOND.matchCount && isBonusMatched == SECOND.bonusNumberMatters) {
+            return SECOND;
+        }
+        for (LottoPrize lottoPrize : values()) {
+            if (matchCount == lottoPrize.matchCount && lottoPrize != SECOND) {
+                return lottoPrize;
+            }
+        }
+
+        return NOTHING;
+    }
+
     public int getAmount() {
         return amount;
     }

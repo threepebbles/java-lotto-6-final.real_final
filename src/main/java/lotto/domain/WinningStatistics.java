@@ -17,17 +17,20 @@ public class WinningStatistics {
     private Long calculateTotalPrizeSum() {
         long sum = 0;
         for (LottoPrize lottoPrize : prizeCount.keySet()) {
-            if (prizeCount.get(lottoPrize) == null) {
-                continue;
-            }
-            sum += (long) prizeCount.get(lottoPrize) * lottoPrize.getAmount();
+            sum += (long) countPrize(lottoPrize) * lottoPrize.getAmount();
         }
         return sum;
     }
 
     public Double calculateRateOfReturn(Lottos purchased) {
         int totalAmount = purchased.size() * LottoMachine.LOTTO_UNIT_PRICE;
-        Double rateOfReturn = (double) calculateTotalPrizeSum() / totalAmount * 100.0;
-        return rateOfReturn;
+        return (double) calculateTotalPrizeSum() / totalAmount * 100.0;
+    }
+
+    public int countPrize(LottoPrize lottoPrize) {
+        if (prizeCount.get(lottoPrize) == null) {
+            return 0;
+        }
+        return prizeCount.get(lottoPrize);
     }
 }

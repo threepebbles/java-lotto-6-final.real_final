@@ -29,8 +29,8 @@ public class MainController {
 
         Lottos purchased = lottoPurchaseService.requestPurchaseLottos(purchaseAmount);
         outputView.printPurchasedLottoScreen(purchased.toDto());
-        WinningNumbers winningNumbers = requestWinningNumbers();
 
+        WinningNumbers winningNumbers = requestWinningNumbers();
         WinningStatistics winningStatistics = lottoMatcherService.calculateWinningStatistics(winningNumbers, purchased);
         outputView.printWinningStatisticsScreen(winningStatistics.toWinningStatisticsDto());
 

@@ -32,4 +32,8 @@ public class PurchaseAmountDto {
             throw new IllegalArgumentException(ErrorMessage.getPurchaseAmountErrorMessage());
         }
     }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
 }

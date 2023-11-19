@@ -45,4 +45,8 @@ public class InputView {
             }
         }
     }
+
+    public void printlnMessage(String message) {
+        System.out.println(message);
+    }
 }

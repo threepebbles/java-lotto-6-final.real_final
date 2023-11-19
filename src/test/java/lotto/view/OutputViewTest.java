@@ -4,10 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import lotto.domain.LottoPrize;
 import lotto.view.output.OutputView;
 import lotto.view.output.dto.LottoDto;
 import lotto.view.output.dto.LottosDto;
+import lotto.view.output.dto.RateOfReturnDto;
+import lotto.view.output.dto.WinningStatisticsDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,5 +50,41 @@ public class OutputViewTest {
                         "[1, 2, 3, 4, 5, 6]",
                         "[1, 2, 3, 4, 5, 7]",
                         "[1, 2, 3, 4, 5, 8]");
+    }
+
+    @Test
+    void 당첨_내역_출력_테스트() {
+        Map<LottoPrize, Integer> prizeCount = new HashMap<>() {{
+            put(LottoPrize.FIFTH, 5);
+            put(LottoPrize.FOURTH, 3);
+            put(LottoPrize.THIRD, 1);
+            put(LottoPrize.SECOND, 1);
+            put(LottoPrize.FIRST, 4);
+            put(LottoPrize.NOTHING, 10);
+        }};
+
+        WinningStatisticsDto winningStatisticsDto = new WinningStatisticsDto(prizeCount);
+
+        outputView.printWinningStatisticsScreen(winningStatisticsDto);
+
+        assertThat(output.toString())
+                .contains("당첨 통계",
+                        "---",
+                        "3개 일치 (5,000원) - 5개",
+                        "4개 일치 (50,000원) - 3개",
+                        "5개 일치 (1,500,000원) - 1개",
+                        "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+                        "6개 일치 (2,000,000,000원) - 4개"
+                );
+    }
+
+    @Test
+    void 수익률_출력_테스트() {
+        Double rateOfReturn = 1231234.5767;
+        RateOfReturnDto rateOfReturnDto = new RateOfReturnDto(rateOfReturn);
+        outputView.printRateOfReturnScreen(rateOfReturnDto);
+
+        assertThat(output.toString())
+                .contains("총 수익률은 1,231,234.6%입니다.");
     }
 }

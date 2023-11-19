@@ -10,16 +10,19 @@ public class BonusNumberDto {
         this.bonusNumber = bonusNumber;
     }
 
-    public static BonusNumberDto createBonusNumberDto(String userInput) {
-        validate(userInput);
-
-        return new BonusNumberDto(Integer.parseInt(userInput));
-    }
-
-    private static void validate(String userInput) {
+    public static BonusNumberDto createBonusNumberDto(String userInput, WinningLottoDto winningLottoDto) {
         validateNull(userInput);
         validateBlank(userInput);
         validateInteger(userInput);
+        int bonusNumber = Integer.parseInt(userInput);
+        validateDuplication(bonusNumber, winningLottoDto);
+        return new BonusNumberDto(bonusNumber);
+    }
+
+    private static void validateDuplication(int bonusNumber, WinningLottoDto winningLottoDto) {
+        if (winningLottoDto.getNumbers().contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.getBonusNumberErrorMessage());
+        }
     }
 
     private static void validateInteger(String number) {

@@ -28,11 +28,11 @@ public class InputView {
         });
     }
 
-    public BonusNumberDto requestBonusNumberDto() {
+    public BonusNumberDto requestBonusNumberDto(WinningLottoDto winningLottoDto) {
         return (BonusNumberDto) retryUntilSuccess(() -> {
             System.out.print(ENTER_BONUS_NUMBER);
             String bonusNumber = Console.readLine();
-            return BonusNumberDto.createBonusNumberDto(bonusNumber);
+            return BonusNumberDto.createBonusNumberDto(bonusNumber, winningLottoDto);
         });
     }
 

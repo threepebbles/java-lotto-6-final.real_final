@@ -17,8 +17,12 @@ public class Lotto {
                 .toList();
     }
 
-    public static Lotto createDto(WinningLottoDto winningLottoDto) {
+    public static Lotto createLotto(WinningLottoDto winningLottoDto) {
         return new Lotto(winningLottoDto.getNumbers());
+    }
+
+    public LottoDto toDto() {
+        return new LottoDto(numbers);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -44,11 +48,11 @@ public class Lotto {
         }
     }
 
-    public LottoDto toDto() {
-        return new LottoDto(numbers);
-    }
-
     public boolean contains(Integer target) {
         return numbers.contains(target);
+    }
+
+    public WinningLottoDto toWinningLottoDto() {
+        return new WinningLottoDto(numbers);
     }
 }

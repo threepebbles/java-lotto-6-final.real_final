@@ -25,27 +25,29 @@ public class MainController {
         Lottos purchased = lottoPurchaseService.requestPurchaseLottos(purchaseAmount);
         outputView.printPurchasedLottoScreen(purchased.toDto());
         WinningNumbers winningNumbers = requestWinningNumbers();
-        
+
     }
 
     private WinningNumbers requestWinningNumbers() {
         Lotto winningLotto = requestWinningLotto();
-        int bonusNumber = requestBonusNumber();
+        int bonusNumber = requestBonusNumber(winningLotto);
         return new WinningNumbers(winningLotto, bonusNumber);
-    }
-
-    private int requestBonusNumber() {
-        return inputView.requestBonusNumberDto()
-                .getBonusNumber();
-    }
-
-    private Lotto requestWinningLotto() {
-        return (Lotto) retryUntilSuccess(() -> Lotto.createDto(inputView.requestWinningLottoDto()));
     }
 
     private int requestPurchaseAmount() {
         return inputView.requestPurchaseAmountDto()
                 .getPurchaseAmount();
+    }
+
+    private Lotto requestWinningLotto() {
+        return (Lotto) retryUntilSuccess(() ->
+                Lotto.createLotto(inputView.requestWinningLottoDto()));
+    }
+
+    private Integer requestBonusNumber(Lotto winningLotto) {
+        return (Integer) retryUntilSuccess(() ->
+                inputView.requestBonusNumberDto(winningLotto.toWinningLottoDto())
+                        .getBonusNumber());
     }
 
     private <T> Object retryUntilSuccess(Supplier<T> function) {

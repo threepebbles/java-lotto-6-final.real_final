@@ -18,6 +18,10 @@ public class Lottos implements Iterable<Lotto> {
                 .toList());
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     @Override
     public Iterator<Lotto> iterator() {
         return lottos.iterator();

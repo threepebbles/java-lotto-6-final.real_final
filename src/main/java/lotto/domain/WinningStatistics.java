@@ -13,4 +13,18 @@ public class WinningStatistics {
     public WinningStatisticsDto toWinningStatisticsDto() {
         return new WinningStatisticsDto(prizeCount);
     }
+
+    private Long calculateTotalPrizeSum() {
+        long sum = 0;
+        for (LottoPrize lottoPrize : prizeCount.keySet()) {
+            sum += (long) prizeCount.get(lottoPrize) * lottoPrize.getAmount();
+        }
+        return sum;
+    }
+
+    public Double calculateRateOfReturn(Lottos purchased) {
+        int totalAmount = purchased.size() * LottoMachine.LOTTO_UNIT_PRICE;
+        Double rateOfReturn = (double) calculateTotalPrizeSum() / totalAmount;
+        return rateOfReturn;
+    }
 }
